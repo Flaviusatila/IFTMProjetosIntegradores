@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Product Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Product List</h1>
+    <a href="/new">Create New Product</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Made In</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="colaboradores : ${listColaboradores}">
+                <td th:text="${colaboradores.cadastro}">Product ID</td>
+                <td th:text="${colaboradores.cpf}">Name</td>
+                <td th:text="${colaboradores.email}">Brand</td>
+                <td th:text="${colaboradores.nome}">Made in</td>
+                <td th:text="${colaboradores.papel}">Price</td>
+                <td>
+                    <a th:href="/@{'/edit/' + ${colaboradores.cadastro_gestor}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="/@{'/delete/' + ${colaboradores.cadastro_gestor}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+</html>
