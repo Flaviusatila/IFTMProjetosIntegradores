@@ -4,21 +4,18 @@ criar = async () => {
             levantarBanco.executeSql("CREATE TABLE users (ID PRIMARY KEY, email TEXT, senha TEXT)");
 });
 }
-setAlert = (message) => { 
-    var ele =document.createElement('div') 
-    ele.innerHTML =`<div class="alert alert-danger" role="alert">${message}</div>`
-    document.body.appendChild(ele);
-}
+// setAlert = (message) => { 
+//     var ele =document.createElement('div') 
+//     ele.innerHTML =`<div class="alert alert-danger" role="alert">${message}</div>`
+//     document.body.appendChild(ele);
+// }
 salvar = async () => {
     var email = document.getElementById('cadastroEmail').value;
     var senha = document.getElementById('cadastroSenha').value;
-    // var email = "flaviusA@toasd.cao"
-    // var senha = "testes"
     await db.transaction(async (salvarUser) => {
         await salvarUser.executeSql("INSERT INTO users (email, senha) VALUES (?,?)",[email,senha]);
     });
-    await redirect();
-    setAlert('Usuario Cadastrado');
+    alert('Usuario Cadastrado');
 }
 
     findBy = async () => {
@@ -31,16 +28,13 @@ salvar = async () => {
             var len = results.rows.length;
             console.log('len', len);
             if (len > 0) {
-                alert('usuario Cadastrado');
+                alert('Usuario Cadastrado');
             } else {
-             alert('Usuario nao Cadastrado');
+                alert('Usuario nao Cadastrado');
             }
            });
         });
 
     }   
 
-    redirect = () => {window.location.href = 'index.html'}
-
-   
-    
+    redirect = () => {window.location.href = "index.html"}
