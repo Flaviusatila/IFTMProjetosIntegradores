@@ -1,4 +1,5 @@
 var db = openDatabase("MeuBanco","2.0", "Mybase", 4048);
+var cont;
 criar = async () => {
         await db.transaction(function(levantarBanco){
             levantarBanco.executeSql("CREATE TABLE users (ID PRIMARY KEY, email TEXT, senha TEXT)");
@@ -9,13 +10,13 @@ criar = async () => {
 //     ele.innerHTML =`<div class="alert alert-danger" role="alert">${message}</div>`
 //     document.body.appendChild(ele);
 // }
-salvar = async () => {
+salvardb = async () => {
     var email = document.getElementById('cadastroEmail').value;
     var senha = document.getElementById('cadastroSenha').value;
     await db.transaction(async (salvarUser) => {
-        await salvarUser.executeSql("INSERT INTO users (email, senha) VALUES (?,?)",[email,senha]);
+        salvarUser.executeSql("INSERT INTO users (email, senha) VALUES (?,?)",[email,senha]);
+        alert("Novo usuario Cadastrado com sucesso")
     });
-    alert('Usuario Cadastrado');
 }
 
     findBy = async () => {
@@ -37,4 +38,22 @@ salvar = async () => {
 
     }   
 
+    salvar = () =>{
+        var email = document.getElementById('cadastroEmail').value;
+        db.transaction(async (find) => {
+           await find.executeSql("SELECT * FROM users WHERE email = ?", [email],
+           (find, results) => {
+            var len = results.rows.length;
+            console.log('len', len);
+            if (len > 0) {
+                alert('Usuario já Cadastrado');
+            } else {
+               salvardb();
+            }
+           });
+        });
+    }
+
     redirect = () => {window.location.href = "index.html"}
+
+    
