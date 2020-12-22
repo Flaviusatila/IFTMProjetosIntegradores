@@ -16,7 +16,7 @@ public class ConsultaController {
     @Autowired
     ConsultaService service;
 
-    @PostMapping
+    @PostMapping("/procedimentos" )
     public ResponseEntity<Object> procedimentosRealizados(@RequestBody Consulta request){
         Consulta response = service.save(request);
         return ResponseEntity.ok().body( response );
