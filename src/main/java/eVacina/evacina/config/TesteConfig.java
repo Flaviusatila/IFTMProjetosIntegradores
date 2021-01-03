@@ -33,11 +33,11 @@ public class TesteConfig implements CommandLineRunner {
     private static final Date date = new Date( 2020, 22, 11 );
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
 
         CartaoVacina cartaoVacina = new CartaoVacina();
-        cartaoVacina.setCod( 1L );
+        cartaoVacina.setCod( "1123123" );
         cartaoVacina.setQtdVacina( 1L );
         cartaoVacina.setVacinaPendente( "Nenhum" );
         cartaoVacina.setObservacoes( "Esta Tudo regularizado" );

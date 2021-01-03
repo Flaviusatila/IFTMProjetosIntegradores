@@ -1,5 +1,6 @@
 package eVacina.evacina.controller;
 
+import eVacina.evacina.dtos.CadastrarPacienteDTO;
 import eVacina.evacina.entites.Paciente;
 import eVacina.evacina.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,15 @@ public class PacienteController {
         return ResponseEntity.ok().body( list );
     }
 
-    @PostMapping
-    public ResponseEntity<Object> save(@RequestBody Paciente request){
-        Paciente response = service.save(request);
+    @PostMapping("/cadastrar")
+    public ResponseEntity<CadastrarPacienteDTO> save(@RequestBody CadastrarPacienteDTO request) throws Exception {
+        CadastrarPacienteDTO response = service.savePaciente(request);
         return ResponseEntity.ok().body( response );
     }
 
     @PatchMapping
     public ResponseEntity<Object> atualiza(@RequestBody Paciente request){
-        Paciente response = service.save(request);
+        Paciente response = service.atualiza(request);
         return ResponseEntity.ok().body( response );
     }
 }

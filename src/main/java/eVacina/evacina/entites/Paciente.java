@@ -21,6 +21,7 @@ public class Paciente {
     @Temporal( TemporalType.DATE )
     private Date dataCastro;
 
+
     public String getCpf() {
         return cpf;
     }

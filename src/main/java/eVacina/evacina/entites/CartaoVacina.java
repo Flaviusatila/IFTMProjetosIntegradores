@@ -14,7 +14,7 @@ public class CartaoVacina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private Long cod;
+    private String cod;
 
     private Long qtdVacina;
 
@@ -29,11 +29,11 @@ public class CartaoVacina {
     private List<ItemVacina> itemVacinas;
 
 
-    public Long getCod() {
+    public String getCod() {
         return cod;
     }
 
-    public void setCod(Long cod) {
+    public void setCod(String cod) {
         this.cod = cod;
     }
 
