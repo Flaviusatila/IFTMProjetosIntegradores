@@ -1,6 +1,9 @@
 package eVacina.evacina.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,13 +22,12 @@ public class CartaoVacina {
 
     private String observacoes;
 
-    public Long getId() {
-        return Id;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    private Telefone telefone;
 
-    public void setId(Long id) {
-        Id = id;
-    }
+    @OneToMany(mappedBy = "cartaoVacina", fetch = FetchType.EAGER)
+    private List<ItemVacina> itemVacinas;
+
 
     public Long getCod() {
         return cod;
@@ -57,6 +59,22 @@ public class CartaoVacina {
 
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
+    }
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    public List<ItemVacina> getItemVacinas() {
+        return itemVacinas;
+    }
+
+    public void setItemVacinas(List<ItemVacina> itemVacinas) {
+        this.itemVacinas = itemVacinas;
     }
 
     @Override

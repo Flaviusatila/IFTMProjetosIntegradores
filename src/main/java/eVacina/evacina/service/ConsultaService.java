@@ -5,6 +5,8 @@ import eVacina.evacina.repository.ConsultaJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConsultaService {
 
@@ -13,5 +15,9 @@ public class ConsultaService {
 
     public Consulta save (Consulta request){
         return repository.save( request );
+    }
+
+    public List<Consulta> findAll(){
+        return repository.findAll();
     }
 }

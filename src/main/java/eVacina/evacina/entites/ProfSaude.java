@@ -1,6 +1,9 @@
 package eVacina.evacina.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,13 +18,8 @@ public class ProfSaude {
 
     private Long senha;
 
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
+    @OneToMany(mappedBy = "profSaude", fetch = FetchType.EAGER)
+    private List<Consulta> consultas;
 
     public Long getUsuario() {
         return usuario;
@@ -37,6 +35,14 @@ public class ProfSaude {
 
     public void setSenha(Long senha) {
         this.senha = senha;
+    }
+
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(List<Consulta> consultas) {
+        this.consultas = consultas;
     }
 
     @Override

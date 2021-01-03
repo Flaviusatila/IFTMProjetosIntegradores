@@ -1,9 +1,7 @@
 package eVacina.evacina.entites;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,15 +18,8 @@ public class Paciente {
 
     private String apelido;
 
-    private LocalDate dataCastro;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
+    @Temporal( TemporalType.DATE )
+    private Date dataCastro;
 
     public String getCpf() {
         return cpf;
@@ -54,11 +45,11 @@ public class Paciente {
         this.apelido = apelido;
     }
 
-    public LocalDate getDataCastro() {
+    public Date getDataCastro() {
         return dataCastro;
     }
 
-    public void setDataCastro(LocalDate dataCastro) {
+    public void setDataCastro(Date dataCastro) {
         this.dataCastro = dataCastro;
     }
 

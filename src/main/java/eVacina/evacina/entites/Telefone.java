@@ -1,5 +1,7 @@
 package eVacina.evacina.entites;
 
+import eVacina.evacina.entites.enums.TipoTelefone;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -11,32 +13,35 @@ public class Telefone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private Long tipo;
+    private TipoTelefone tipo;
 
-    private Long numero;
+    private String numero;
 
-    public Long getId() {
-        return Id;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
+
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public Long getTipo() {
+    public TipoTelefone getTipo() {
         return tipo;
     }
 
-    public void setTipo(Long tipo) {
+    public void setTipo(TipoTelefone tipo) {
         this.tipo = tipo;
     }
 
-    public Long getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     @Override

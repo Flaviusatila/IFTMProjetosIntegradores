@@ -1,7 +1,9 @@
 package eVacina.evacina.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,23 +14,33 @@ public class ItemVacina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private LocalDate dataAplicacao;
+    @Temporal( TemporalType.DATE )
+    private Date dataAplicacao;
 
     private String observacao;
 
-    public Long getId() {
-        return Id;
+    @ManyToOne
+    @JoinColumn(name = "cartao_vacina_id")
+    private CartaoVacina cartaoVacina;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Vacina vacina;
+
+    public ItemVacina() {
     }
 
-    public void setId(Long id) {
-        Id = id;
+    public ItemVacina(Date dataAplicacao, String observacao, String nome, String dose) {
+        this.dataAplicacao = dataAplicacao;
+        this.observacao = observacao;
+        this.vacina.setNome( nome );
+        this.vacina.setDose( dose );
     }
 
-    public LocalDate getDataAplicacao() {
+    public Date getDataAplicacao() {
         return dataAplicacao;
     }
 
-    public void setDataAplicacao(LocalDate dataAplicacao) {
+    public void setDataAplicacao(Date dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
     }
 
@@ -38,6 +50,22 @@ public class ItemVacina {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public CartaoVacina getCartaoVacina() {
+        return cartaoVacina;
+    }
+
+    public void setCartaoVacina(CartaoVacina cartaoVacina) {
+        this.cartaoVacina = cartaoVacina;
+    }
+
+    public Vacina getVacina() {
+        return vacina;
+    }
+
+    public void setVacina(Vacina vacina) {
+        this.vacina = vacina;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package eVacina.evacina.entites;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,15 +20,8 @@ public class Vacina {
 
     private Integer lote;
 
-    private LocalDate dataVenc;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        this.Id = id;
-    }
+    @Temporal( TemporalType.DATE )
+    private Date dataVenc;
 
     public String getNome() {
         return nome;
@@ -62,11 +55,11 @@ public class Vacina {
         this.lote = lote;
     }
 
-    public LocalDate getDataVenc() {
+    public Date getDataVenc() {
         return dataVenc;
     }
 
-    public void setDataVenc(LocalDate dataVenc) {
+    public void setDataVenc(Date dataVenc) {
         this.dataVenc = dataVenc;
     }
 

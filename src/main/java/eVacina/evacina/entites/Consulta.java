@@ -1,8 +1,11 @@
 package eVacina.evacina.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,23 +16,23 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private LocalDate data;
+    private Date data;
 
     private LocalDateTime hora;
 
-    public Long getId() {
-        return Id;
-    }
+    private String local;
 
-    public void setId(Long id) {
-        Id = id;
-    }
+    @OneToOne
+    private CartaoVacina cartaoVacinaConsulta;
 
-    public LocalDate getData() {
+    @OneToOne
+    private ProfSaude profSaude;
+
+    public Date getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -39,6 +42,30 @@ public class Consulta {
 
     public void setHora(LocalDateTime hora) {
         this.hora = hora;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public CartaoVacina getCartaoVacinaConsulta() {
+        return cartaoVacinaConsulta;
+    }
+
+    public void setCartaoVacinaConsulta(CartaoVacina cartaoVacinaConsulta) {
+        this.cartaoVacinaConsulta = cartaoVacinaConsulta;
+    }
+
+    public ProfSaude getProfSaude() {
+        return profSaude;
+    }
+
+    public void setProfSaude(ProfSaude profSaude) {
+        this.profSaude = profSaude;
     }
 
     @Override

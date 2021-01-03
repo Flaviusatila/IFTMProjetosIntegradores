@@ -16,7 +16,15 @@ public class ConsultaController {
     @Autowired
     ConsultaService service;
 
-    @PostMapping("/procedimentos" )
+
+    @GetMapping
+    public ResponseEntity<Object> findAll(){
+        List<Consulta> list = service.findAll();
+        return ResponseEntity.ok().body( list );
+    }
+
+
+    @PostMapping("/procedimentos")
     public ResponseEntity<Object> procedimentosRealizados(@RequestBody Consulta request){
         Consulta response = service.save(request);
         return ResponseEntity.ok().body( response );
