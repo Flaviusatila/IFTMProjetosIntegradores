@@ -21,6 +21,9 @@ public class Paciente {
     @Temporal( TemporalType.DATE )
     private Date dataCastro;
 
+    public Long getId() {
+        return Id;
+    }
 
     public String getCpf() {
         return cpf;

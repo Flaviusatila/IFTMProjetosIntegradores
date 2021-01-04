@@ -2,13 +2,14 @@ package eVacina.evacina.controller;
 
 import eVacina.evacina.dtos.AtualizaPacienteDTO;
 import eVacina.evacina.dtos.CadastrarPacienteDTO;
-import eVacina.evacina.entites.Paciente;
+import eVacina.evacina.dtos.ConsultarPacientesCadastradosDTO;
 import eVacina.evacina.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NotContextException;
 import java.util.List;
 
 
@@ -21,8 +22,8 @@ public class PacienteController {
     private PacienteService service;
 
     @GetMapping
-    public ResponseEntity<Object> findAll(){
-        List<Paciente> list = service.findAll();
+    public ResponseEntity<List<ConsultarPacientesCadastradosDTO>> findAll() throws NotContextException {
+        List<ConsultarPacientesCadastradosDTO> list = service.findAll();
         return ResponseEntity.ok().body( list );
     }
 

@@ -2,16 +2,20 @@ package eVacina.evacina.service;
 
 import eVacina.evacina.dtos.AtualizaPacienteDTO;
 import eVacina.evacina.dtos.CadastrarPacienteDTO;
+import eVacina.evacina.dtos.ConsultarPacientesCadastradosDTO;
 import eVacina.evacina.entites.CartaoVacina;
 import eVacina.evacina.entites.Endereco;
 import eVacina.evacina.entites.Paciente;
 import eVacina.evacina.entites.Telefone;
 import eVacina.evacina.repository.CartaoVacinaJpaRepository;
 import eVacina.evacina.repository.PacienteJpaRepository;
+import eVacina.evacina.repository.TelefoneJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.naming.NotContextException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +29,26 @@ public class PacienteService {
     @Autowired
     CartaoVacinaJpaRepository cartaoVacinaJpaRepository;
 
-    public List<Paciente> findAll(){
-        return pacienteJpaRepository.findAll();
-    }
+    @Autowired
+    TelefoneJpaRepository telefoneJpaRepository;
+
+    public List<ConsultarPacientesCadastradosDTO> findAll() throws NotContextException {
+        List<Paciente> pacienteList = pacienteJpaRepository.findAll();
+        List<ConsultarPacientesCadastradosDTO> list = new ArrayList<>();
+
+
+        if (!pacienteList.isEmpty()) {
+            for (Paciente paciente :
+                    pacienteList) {
+                CartaoVacina cartaoVacina = cartaoVacinaJpaRepository.findById( paciente.getId() )
+                                                      .orElseThrow( () -> new NotContextException("Nao existe Pacientes cadastrados"));
+                ConsultarPacientesCadastradosDTO dto = new ConsultarPacientesCadastradosDTO( paciente, cartaoVacina );
+                list.add( dto );
+                return list;
+            }
+        }
+        throw new NotContextException("Nao existe Pacientes cadastrados");
+}
 
 //    public Paciente atualiza(Paciente request){
 //        return pacienteJpaRepository.save( request );
