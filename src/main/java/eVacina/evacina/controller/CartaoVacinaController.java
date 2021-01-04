@@ -1,15 +1,14 @@
 package eVacina.evacina.controller;
 
+import eVacina.evacina.dtos.CadastrarDadosCartaoVacinaDTO;
 import eVacina.evacina.dtos.ListaItemVacinaDTO;
 import eVacina.evacina.entites.CartaoVacina;
 import eVacina.evacina.service.CartaoVacinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NotContextException;
 import java.util.List;
 
 
@@ -31,6 +30,12 @@ public class CartaoVacinaController {
     public ResponseEntity<List<ListaItemVacinaDTO>> consultarHistorico(@PathVariable Long id){
         List<ListaItemVacinaDTO> list = service.consultarHistoricoDTOS(id);
         return ResponseEntity.ok().body( list );
+    }
+
+    @PostMapping("/cadastrar")
+    public ResponseEntity<CadastrarDadosCartaoVacinaDTO> cadastrarDadosCartaoVacina(@RequestBody CadastrarDadosCartaoVacinaDTO dto) throws NotContextException {
+        CadastrarDadosCartaoVacinaDTO response = service.cadastrarDadosCartaoVacina(dto);
+        return ResponseEntity.ok().body( response );
     }
 
 }

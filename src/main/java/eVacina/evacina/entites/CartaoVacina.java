@@ -18,8 +18,6 @@ public class CartaoVacina {
 
     private String vacinaPendente;
 
-    private String observacoes;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Telefone telefone;
 
@@ -54,13 +52,6 @@ public class CartaoVacina {
         this.vacinaPendente = vacinaPendente;
     }
 
-    public String getObservacoes() {
-        return observacoes;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
-    }
 
     public Telefone getTelefone() {
         return telefone;
@@ -83,11 +74,11 @@ public class CartaoVacina {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CartaoVacina that = ( CartaoVacina ) o;
-        return Objects.equals( Id, that.Id ) && Objects.equals( cod, that.cod ) && Objects.equals( qtdVacina, that.qtdVacina ) && Objects.equals( vacinaPendente, that.vacinaPendente ) && Objects.equals( observacoes, that.observacoes );
+        return Objects.equals( Id, that.Id ) && Objects.equals( cod, that.cod ) && Objects.equals( qtdVacina, that.qtdVacina ) && Objects.equals( vacinaPendente, that.vacinaPendente );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( Id, cod, qtdVacina, vacinaPendente, observacoes );
+        return Objects.hash( Id, cod, qtdVacina, vacinaPendente );
     }
 }

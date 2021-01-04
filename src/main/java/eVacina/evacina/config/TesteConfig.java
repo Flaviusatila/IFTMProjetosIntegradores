@@ -41,7 +41,6 @@ public class TesteConfig implements CommandLineRunner {
         cartaoVacina.setCod( "1123123" );
         cartaoVacina.setQtdVacina( 1L );
         cartaoVacina.setVacinaPendente( "Nenhum" );
-        cartaoVacina.setObservacoes( "Esta Tudo regularizado" );
         cartaoVacina.setTelefone( montaTelefone() );
 
         cartaoVacinaJpaRepository.save( cartaoVacina );
