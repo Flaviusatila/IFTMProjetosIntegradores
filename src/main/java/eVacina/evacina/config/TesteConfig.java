@@ -1,6 +1,7 @@
 package eVacina.evacina.config;
 
 import eVacina.evacina.entites.*;
+import eVacina.evacina.entites.enums.HorarioDisponivel;
 import eVacina.evacina.entites.enums.TipoTelefone;
 import eVacina.evacina.repository.CartaoVacinaJpaRepository;
 import eVacina.evacina.repository.ConsultaJpaRepository;
@@ -57,9 +58,9 @@ public class TesteConfig implements CommandLineRunner {
         Consulta consulta = new Consulta();
 
         consulta.setHora( LocalDateTime.now() );
-        consulta.setData( date );
         consulta.setCartaoVacinaConsulta( cartaoVacina );
         consulta.setProfSaude( montaProfSaude() );
+        consulta.setHorarioDisponivel( HorarioDisponivel.DISPONIVEL );
 
         consultaJpaRepository.save( consulta );
 
@@ -68,8 +69,8 @@ public class TesteConfig implements CommandLineRunner {
     private ProfSaude montaProfSaude() {
 
         ProfSaude profSaude = new ProfSaude();
-        profSaude.setSenha( 101010L );
-        profSaude.setUsuario( 1010L );
+        profSaude.setSenha( "101010" );
+        profSaude.setUsuario( "1010" );
         profSaudeJpaRepository.save( profSaude );
         return profSaude;
     }

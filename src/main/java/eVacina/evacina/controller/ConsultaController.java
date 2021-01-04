@@ -1,7 +1,7 @@
 package eVacina.evacina.controller;
 
+import eVacina.evacina.dtos.AgendarRetornoDTO;
 import eVacina.evacina.entites.Consulta;
-import eVacina.evacina.entites.Paciente;
 import eVacina.evacina.service.ConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +30,9 @@ public class ConsultaController {
         return ResponseEntity.ok().body( response );
     }
 
-    @PostMapping
-    public ResponseEntity<Object> agendarRetorno(@RequestBody Consulta request){
-        Consulta response = service.save(request);
+    @PostMapping("/agendar_retorno")
+    public ResponseEntity<AgendarRetornoDTO> agendarRetorno(@RequestBody AgendarRetornoDTO request) throws Throwable {
+        AgendarRetornoDTO response = service.agendarRetorno(request);
         return ResponseEntity.ok().body( response );
     }
 

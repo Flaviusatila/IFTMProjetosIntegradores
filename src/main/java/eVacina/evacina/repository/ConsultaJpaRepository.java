@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsultaJpaRepository  extends JpaRepository<Consulta,Long> {
+
+
+//    Optional findByHora(LocalDateTime hora);
 }

@@ -13,7 +13,7 @@ public class Telefone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private TipoTelefone tipo;
+    private Integer tipo;
 
     private String numero;
 
@@ -25,11 +25,12 @@ public class Telefone {
     }
 
     public TipoTelefone getTipo() {
-        return tipo;
+        return TipoTelefone.valueOf(tipo);
     }
 
     public void setTipo(TipoTelefone tipo) {
-        this.tipo = tipo;
+        if (tipo != null)
+            this.tipo = tipo.getCode();
     }
 
     public String getNumero() {

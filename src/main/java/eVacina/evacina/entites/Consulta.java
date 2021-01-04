@@ -1,26 +1,33 @@
 package eVacina.evacina.entites;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import eVacina.evacina.entites.enums.HorarioDisponivel;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_consulta")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Consulta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private Date data;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm")
     private LocalDateTime hora;
 
     private String local;
+
+    @JsonIgnore
+    private Integer horarioDisponivel;
+
+    @OneToOne
+    private Paciente paciente;
 
     @OneToOne
     private CartaoVacina cartaoVacinaConsulta;
@@ -28,13 +35,10 @@ public class Consulta {
     @OneToOne
     private ProfSaude profSaude;
 
-    public Date getData() {
-        return data;
+    public Long getId() {
+        return Id;
     }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
 
     public LocalDateTime getHora() {
         return hora;
@@ -68,16 +72,33 @@ public class Consulta {
         this.profSaude = profSaude;
     }
 
+    public HorarioDisponivel getHorarioDisponivel() {
+        return HorarioDisponivel.valueOf( horarioDisponivel);
+    }
+
+    public void setHorarioDisponivel(HorarioDisponivel horarioDisponivel) {
+        if (horarioDisponivel != null)
+        this.horarioDisponivel = horarioDisponivel.getCode();
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Consulta consulta = ( Consulta ) o;
-        return Objects.equals( Id, consulta.Id ) && Objects.equals( data, consulta.data ) && Objects.equals( hora, consulta.hora );
+        return Objects.equals( Id, consulta.Id ) && Objects.equals( hora, consulta.hora );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( Id, data, hora );
+        return Objects.hash( Id, hora );
     }
 }

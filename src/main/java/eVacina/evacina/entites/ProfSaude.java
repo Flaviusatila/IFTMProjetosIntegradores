@@ -1,7 +1,5 @@
 package eVacina.evacina.entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -14,26 +12,26 @@ public class ProfSaude {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private Long usuario;
+    private String usuario;
 
-    private Long senha;
+    private String senha;
 
     @OneToMany(mappedBy = "profSaude", fetch = FetchType.EAGER)
     private List<Consulta> consultas;
 
-    public Long getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Long usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
-    public Long getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(Long senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 
