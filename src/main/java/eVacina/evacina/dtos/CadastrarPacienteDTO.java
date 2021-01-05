@@ -2,28 +2,37 @@ package eVacina.evacina.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
 import eVacina.evacina.entites.Telefone;
-import org.hibernate.annotations.NotFound;
+import eVacina.evacina.service.validations.CadastraPacienteValid;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
+@CadastraPacienteValid
 public class CadastrarPacienteDTO {
 
     @JsonProperty("cpf")
-    @NotNull
+    @NotEmpty(message = "Nao pode ser vazio o cpf")
+    @Length(min = 11,max = 11, message = "O tamanho de ser entre 11 numeros")
     private String cpf;
 
     @JsonProperty("nome")
-    @NotNull
+    @NotEmpty(message = "Nao pode ser vazio o nome")
+    @Length(min = 5,max = 80, message = "O tamanho de ser entre 5 e 80 letras")
     private String nome;
 
     @JsonProperty("apelido")
+    @NotEmpty(message = "Nao pode ser vazio o email")
+    @Email(message = "Problema na autenticação do email")
     private String apelido;
 
     @JsonProperty("telefone")
+    @NotEmpty(message = "Nao pode ser vazio o phone")
+    @Length(min = 8, max = 20, message = "O tamanho de ser entre 8 e 20 numeros")
     private Telefone telefone;
 
     public Telefone getTelefone() {

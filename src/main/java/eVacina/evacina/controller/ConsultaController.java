@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/consulta")
 public class ConsultaController {
@@ -16,29 +18,10 @@ public class ConsultaController {
     @Autowired
     ConsultaService service;
 
-
-//    @GetMapping
-//    public ResponseEntity<Object> findAll(){
-//        List<Consulta> list = service.findAll();
-//        return ResponseEntity.ok().body( list );
-//    }
-
-
-//    @PostMapping("/procedimentos")
-//    public ResponseEntity<Object> procedimentosRealizados(@RequestBody Consulta request){
-//        Consulta response = service.save(request);
-//        return ResponseEntity.ok().body( response );
-//    }
-
     @PostMapping("/agendar_retorno")
-    public ResponseEntity<AgendarRetornoDTO> agendarRetorno(@RequestBody AgendarRetornoDTO request) throws Throwable {
+    public ResponseEntity<AgendarRetornoDTO> agendarRetorno(@RequestBody @Valid AgendarRetornoDTO request){
         AgendarRetornoDTO response = service.agendarRetorno(request);
         return ResponseEntity.ok().body( response );
     }
 
-//    @PatchMapping
-//    public ResponseEntity<Object> descreverObservacao(@RequestBody Consulta request){
-//        Consulta response = service.save(request);
-//        return ResponseEntity.ok().body( response );
-//    }
 }

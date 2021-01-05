@@ -1,5 +1,6 @@
 package eVacina.evacina.controller;
 
+import eVacina.evacina.dtos.AtualizaPacienteDTO;
 import eVacina.evacina.dtos.CadastrarPacienteDTO;
 import eVacina.evacina.dtos.ConsultarPacientesCadastradosDTO;
 import eVacina.evacina.service.PacienteService;
@@ -31,4 +32,9 @@ public class PacienteController {
         return ResponseEntity.ok().body( response );
     }
 
+    @PatchMapping
+    public ResponseEntity<AtualizaPacienteDTO> atualizaPaciente(@RequestBody @Valid AtualizaPacienteDTO request) {
+        AtualizaPacienteDTO response = service.atualiza( request );
+        return ResponseEntity.ok().body( response );
+    }
 }

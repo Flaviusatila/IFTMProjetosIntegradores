@@ -17,12 +17,12 @@ public class CartaoVacinaController {
     private CartaoVacinaService service;
 
     @GetMapping("/vacinas/{id}")
-    public ResponseEntity<List<ListaItemVacinaDTO>> consultarHistorico(@PathVariable Long id){
+    public ResponseEntity<List<ListaItemVacinaDTO>> consultarHistoricoPaciente(@PathVariable Long id){
            List<ListaItemVacinaDTO> list = service.consultarHistoricoDTOS(id);
            return ResponseEntity.ok().body( list );
     }
     @PostMapping("/cadastrar")
-    public ResponseEntity<CadastrarDadosCartaoVacinaDTO> cadastrarDadosCartaoVacina(@RequestBody CadastrarDadosCartaoVacinaDTO dto){
+    public ResponseEntity<CadastrarDadosCartaoVacinaDTO> registrarProcedimentoRealizados(@RequestBody CadastrarDadosCartaoVacinaDTO dto){
         CadastrarDadosCartaoVacinaDTO response = service.cadastrarDadosCartaoVacina(dto);
         return ResponseEntity.ok().body( response );
     }

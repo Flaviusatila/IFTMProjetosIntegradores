@@ -1,6 +1,7 @@
 package eVacina.evacina.entites;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,14 +13,18 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(unique = true)
     private String cpf;
 
     private String nome;
 
     private String apelido;
 
-
     private Date dataCastro;
+
+    private Instant creatAt;
+
+    private Instant updateAt;
 
     public Long getId() {
         return Id;
@@ -55,6 +60,18 @@ public class Paciente {
 
     public void setDataCastro(Date dataCastro) {
         this.dataCastro = dataCastro;
+    }
+
+    @PrePersist
+    public void creatAt() {
+        Instant now = Instant.now();
+        creatAt = now;
+        updateAt = now;
+    }
+
+    @PreUpdate
+    public void updateAt() {
+        updateAt = Instant.now();
     }
 
     @Override
