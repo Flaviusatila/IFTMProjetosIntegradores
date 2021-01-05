@@ -18,7 +18,7 @@ public class Paciente {
 
     private String apelido;
 
-    @Temporal( TemporalType.DATE )
+
     private Date dataCastro;
 
     public Long getId() {

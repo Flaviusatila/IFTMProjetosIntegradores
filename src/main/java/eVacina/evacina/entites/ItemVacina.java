@@ -1,7 +1,5 @@
 package eVacina.evacina.entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -14,7 +12,7 @@ public class ItemVacina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @Temporal( TemporalType.DATE )
+
     private Date dataAplicacao;
 
     private String observacao;

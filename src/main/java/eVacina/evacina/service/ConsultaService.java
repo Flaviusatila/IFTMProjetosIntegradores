@@ -7,11 +7,11 @@ import eVacina.evacina.entites.ProfSaude;
 import eVacina.evacina.repository.ConsultaJpaRepository;
 import eVacina.evacina.repository.PacienteJpaRepository;
 import eVacina.evacina.repository.ProfSaudeJpaRepository;
+import eVacina.evacina.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.naming.NotContextException;
 import java.util.List;
 
 import static eVacina.evacina.entites.enums.HorarioDisponivel.INDISPONIVEL;
@@ -37,12 +37,12 @@ public class ConsultaService {
     }
 
     @Transactional
-    public AgendarRetornoDTO agendarRetorno(AgendarRetornoDTO request) throws Throwable {
+    public AgendarRetornoDTO agendarRetorno(AgendarRetornoDTO request) {
         Paciente paciente = pacienteJpaRepository.findByCpf( request.getCpf() )
-                            .orElseThrow( () -> new NotContextException("Nao existe Pacientes cadastrados"));
+                            .orElseThrow( () -> new ResourceNotFoundException("Nao existe Pacientes cadastrados"));
 
         ProfSaude profSaude = profSaudeJpaRepository.findByUsuario( request.getUsuario() )
-                              .orElseThrow( () -> new NotContextException("Nao existe Profissionais da Saude cadastrados"));
+                              .orElseThrow( () -> new ResourceNotFoundException("Nao existe Profissionais da Saude cadastrados"));
 
 //        Object existe = consultaJpaRepository.findByHora( request.getConsulta().getHora())
 //                            .orElseThrow( () -> new NotContextException("Cadastro de consulta nao tem horario disponivel"));

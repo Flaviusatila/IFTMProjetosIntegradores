@@ -7,11 +7,11 @@ import eVacina.evacina.repository.CartaoVacinaJpaRepository;
 import eVacina.evacina.repository.ConsultaJpaRepository;
 import eVacina.evacina.repository.PacienteJpaRepository;
 import eVacina.evacina.repository.ProfSaudeJpaRepository;
+import eVacina.evacina.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.naming.NotContextException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,47 +31,47 @@ public class CartaoVacinaService {
     @Autowired
     private CartaoVacinaJpaRepository cartaoVacinaJpaRepository;
 
-    public List<CartaoVacina> findAll(){
+    public List<CartaoVacina> findAll() {
         return cartaoVacinaJpaRepository.findAll();
     }
 
     @Transactional
-    public List<ListaItemVacinaDTO> consultarHistoricoDTOS(Long id){
-       Optional<CartaoVacina> cartaoVacina = cartaoVacinaJpaRepository.findById( id );
+    public List<ListaItemVacinaDTO> consultarHistoricoDTOS(Long id) {
+        Optional<CartaoVacina> cartaoVacina = cartaoVacinaJpaRepository.findById( id );
 
-       ListaItemVacinaDTO listaItemVacinaDTO = new ListaItemVacinaDTO();
+        ListaItemVacinaDTO listaItemVacinaDTO = new ListaItemVacinaDTO();
 
-       List<ListaItemVacinaDTO> lista = new ArrayList<>();
+        List<ListaItemVacinaDTO> lista = new ArrayList<>();
 
-      List<ItemVacina> itemVacinaList = cartaoVacina.get().getItemVacinas();
+        List<ItemVacina> itemVacinaList = cartaoVacina.get().getItemVacinas();
 
-      for (ItemVacina itemVacina : itemVacinaList){
+        for (ItemVacina itemVacina : itemVacinaList) {
 
-          listaItemVacinaDTO.setDataAplicacao(itemVacina.getDataAplicacao());
-          listaItemVacinaDTO.setObservacoes( itemVacina.getObservacao() );
-          listaItemVacinaDTO.setNome( itemVacina.getVacina().getNome() );
-          listaItemVacinaDTO.setDose( itemVacina.getVacina().getDose() );
+            listaItemVacinaDTO.setDataAplicacao( itemVacina.getDataAplicacao() );
+            listaItemVacinaDTO.setObservacoes( itemVacina.getObservacao() );
+            listaItemVacinaDTO.setNome( itemVacina.getVacina().getNome() );
+            listaItemVacinaDTO.setDose( itemVacina.getVacina().getDose() );
 
-          lista.add( listaItemVacinaDTO );
+            lista.add( listaItemVacinaDTO );
 
-      }
+        }
 
-     return lista;
+        return lista;
 
 
     }
 
     @Transactional
-    public CadastrarDadosCartaoVacinaDTO cadastrarDadosCartaoVacina(CadastrarDadosCartaoVacinaDTO dto) throws NotContextException {
+    public CadastrarDadosCartaoVacinaDTO cadastrarDadosCartaoVacina(CadastrarDadosCartaoVacinaDTO dto) {
 
         Paciente paciente = pacienteJpaRepository.findByCpf( dto.getCpf() )
-                .orElseThrow( () -> new NotContextException("Nao existe Pacientes cadastrados"));
+                .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Pacientes cadastrados" ) );
 
         ProfSaude profSaude = profSaudeJpaRepository.findByUsuario( dto.getUsuario() )
-                .orElseThrow( () -> new NotContextException("Nao existe Profissionais da Saude cadastrados"));
+                .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Profissionais da Saude cadastrados" ) );
 
         CartaoVacina cartaoVacina = cartaoVacinaJpaRepository.findByCod( dto.getCpf() )
-                .orElseThrow( () -> new NotContextException("Nao existe Cartao de Vacina cadastrados"));
+                .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Cartao de Vacina cadastrados" ) );
 
         Vacina vacina = new Vacina();
         vacina.setNome( dto.getNome() );
@@ -84,7 +84,7 @@ public class CartaoVacinaService {
         itemVacina.setDataAplicacao( new Date() );
         itemVacina.setVacina( vacina );
 
-        List<ItemVacina> list =  new ArrayList<>();
+        List<ItemVacina> list = new ArrayList<>();
 
         list.add( itemVacina );
         cartaoVacina.setItemVacinas( list );

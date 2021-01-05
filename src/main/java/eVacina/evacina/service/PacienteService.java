@@ -10,11 +10,11 @@ import eVacina.evacina.entites.Telefone;
 import eVacina.evacina.repository.CartaoVacinaJpaRepository;
 import eVacina.evacina.repository.PacienteJpaRepository;
 import eVacina.evacina.repository.TelefoneJpaRepository;
+import eVacina.evacina.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.naming.NotContextException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +32,7 @@ public class PacienteService {
     @Autowired
     TelefoneJpaRepository telefoneJpaRepository;
 
-    public List<ConsultarPacientesCadastradosDTO> findAll() throws NotContextException {
+    public List<ConsultarPacientesCadastradosDTO> findAll() {
         List<Paciente> pacienteList = pacienteJpaRepository.findAll();
         List<ConsultarPacientesCadastradosDTO> list = new ArrayList<>();
 
@@ -41,18 +41,15 @@ public class PacienteService {
             for (Paciente paciente :
                     pacienteList) {
                 CartaoVacina cartaoVacina = cartaoVacinaJpaRepository.findById( paciente.getId() )
-                                                      .orElseThrow( () -> new NotContextException("Nao existe Pacientes cadastrados"));
+                                                      .orElseThrow( () -> new ResourceNotFoundException("Nao existe Pacientes cadastrados"));
                 ConsultarPacientesCadastradosDTO dto = new ConsultarPacientesCadastradosDTO( paciente, cartaoVacina );
                 list.add( dto );
                 return list;
             }
         }
-        throw new NotContextException("Nao existe Pacientes cadastrados");
+        throw new ResourceNotFoundException("Nao existe Pacientes cadastrados");
 }
 
-//    public Paciente atualiza(Paciente request){
-//        return pacienteJpaRepository.save( request );
-//    }
 
     @Transactional
     public CadastrarPacienteDTO savePaciente(CadastrarPacienteDTO request) throws Exception {
@@ -90,18 +87,18 @@ public class PacienteService {
 
             return request;
         }
-        throw new Exception( "Ja Existe cpf Cadastrado" );
+        throw new ResourceNotFoundException( "Ja Existe cpf Cadastrado" );
     }
 
     @Transactional
-    public AtualizaPacienteDTO atualiza(AtualizaPacienteDTO request) throws Exception {
+    public AtualizaPacienteDTO atualiza(AtualizaPacienteDTO request) {
 
         if (pacienteJpaRepository.countByCpf( request.getCpf() ) != 0) {
 
             Paciente paciente = pacienteJpaRepository.findByCpf( request.getCpf() )
-                                            .orElseThrow(() -> new Exception( "Ja Existe cpf Cadastrado" ) );
+                                            .orElseThrow(() -> new ResourceNotFoundException( "Ja Existe cpf Cadastrado" ) );
             CartaoVacina vacina = cartaoVacinaJpaRepository.findByCod(request.getCpf())
-                                    .orElseThrow(() -> new Exception( "Ja Existe cpf Cadastrado" ) );
+                                    .orElseThrow(() -> new ResourceNotFoundException( "Ja Existe cpf Cadastrado" ) );
             Telefone telefone = vacina.getTelefone();
             Endereco endereco = telefone.getEndereco();
 
@@ -128,6 +125,6 @@ public class PacienteService {
 
             return request;
         }
-        throw new Exception( "Não Existe cpf Cadastrado" );
+        throw new ResourceNotFoundException( "Não Existe cpf Cadastrado" );
     }
 }

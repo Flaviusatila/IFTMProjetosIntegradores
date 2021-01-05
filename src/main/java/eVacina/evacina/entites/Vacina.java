@@ -20,7 +20,7 @@ public class Vacina {
 
     private Integer lote;
 
-    @Temporal( TemporalType.DATE )
+
     private Date dataVenc;
 
     public String getNome() {
