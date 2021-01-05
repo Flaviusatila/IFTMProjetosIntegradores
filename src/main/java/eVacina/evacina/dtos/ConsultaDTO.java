@@ -21,14 +21,6 @@ public class ConsultaDTO {
     @JsonProperty("horario_disponivel")
     private Integer horarioDisponivel;
 
-//    @JsonProperty("nome_paciente")
-//    private String nomePaciente;
-//
-//    @JsonProperty("codigo_cartao_vacina")
-//    private String codCartapVacina;
-//
-//    @JsonProperty("usuario_profissional_saude")
-//    private String usuarioProfSaude;
 
     public ConsultaDTO() {
     }
@@ -37,18 +29,13 @@ public class ConsultaDTO {
         this.hora = hora;
         this.local = local;
         this.horarioDisponivel = horarioDisponivel;
-//        this.nomePaciente = paciente.getNome();
-//        this.codCartapVacina = cartaoVacinaConsulta.getCod();
-//        this.usuarioProfSaude = profSaude.getUsuario();
     }
 
     public ConsultaDTO(Consulta consulta) {
         this.hora = consulta.getHora();
         this.local = consulta.getLocal();
         this.horarioDisponivel = consulta.getHorarioDisponivel().getCode();
-//        this.nomePaciente = consulta.getPaciente().getNome();
-//        this.codCartapVacina = consulta.getCartaoVacinaConsulta().getCod();
-//        this.usuarioProfSaude = consulta.getProfSaude().getUsuario();
+
     }
 
     public LocalDateTime getHora() {
@@ -75,27 +62,5 @@ public class ConsultaDTO {
         this.horarioDisponivel = horarioDisponivel;
     }
 
-//    public String getNomePaciente() {
-//        return nomePaciente;
-//    }
-//
-//    public void setNomePaciente(String nomePaciente) {
-//        this.nomePaciente = nomePaciente;
-//    }
-//
-//    public String getCodCartapVacina() {
-//        return codCartapVacina;
-//    }
-//
-//    public void setCodCartapVacina(String codCartapVacina) {
-//        this.codCartapVacina = codCartapVacina;
-//    }
-//
-//    public String getUsuarioProfSaude() {
-//        return usuarioProfSaude;
-//    }
-//
-//    public void setUsuarioProfSaude(String usuarioProfSaude) {
-//        this.usuarioProfSaude = usuarioProfSaude;
-//    }
+
 }

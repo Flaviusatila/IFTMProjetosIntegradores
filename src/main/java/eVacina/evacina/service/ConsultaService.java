@@ -67,6 +67,7 @@ public class ConsultaService {
 //        throw new NotContextException("Consulta nao tem horario disponivel");
     }
 
+    @Transactional
     public Page<ConsultaDTO> findAllPaged(PageRequest pageable) {
         Page<Consulta> list = consultaJpaRepository.findAll(pageable);
         return list.map( e -> new ConsultaDTO(e) );
