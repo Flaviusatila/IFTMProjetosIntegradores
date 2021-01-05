@@ -2,8 +2,8 @@ package eVacina.evacina.entites.enums;
 
 public enum HorarioDisponivel {
 
-    DISPONIVEL(1),
-    INDISPONIVEL(2);
+    DISPONIVEL(0),
+    INDISPONIVEL(1);
 
     private int code;
 

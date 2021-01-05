@@ -2,6 +2,7 @@ package eVacina.evacina.entites;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import eVacina.evacina.entites.enums.HorarioDisponivel;
 
 import javax.persistence.*;
@@ -17,13 +18,12 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm")
     private LocalDateTime hora;
 
     private String local;
 
-
+    @JsonProperty("horario_disponivel")
     private Integer horarioDisponivel;
 
     @OneToOne

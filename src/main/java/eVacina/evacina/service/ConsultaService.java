@@ -1,6 +1,7 @@
 package eVacina.evacina.service;
 
 import eVacina.evacina.dtos.AgendarRetornoDTO;
+import eVacina.evacina.dtos.ConsultaDTO;
 import eVacina.evacina.entites.Consulta;
 import eVacina.evacina.entites.Paciente;
 import eVacina.evacina.entites.ProfSaude;
@@ -9,6 +10,8 @@ import eVacina.evacina.repository.PacienteJpaRepository;
 import eVacina.evacina.repository.ProfSaudeJpaRepository;
 import eVacina.evacina.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,5 +65,10 @@ public class ConsultaService {
             return request;
 //        }
 //        throw new NotContextException("Consulta nao tem horario disponivel");
+    }
+
+    public Page<ConsultaDTO> findAllPaged(PageRequest pageable) {
+        Page<Consulta> list = consultaJpaRepository.findAll(pageable);
+        return list.map( e -> new ConsultaDTO(e) );
     }
 }
