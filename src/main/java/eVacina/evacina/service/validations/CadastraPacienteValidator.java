@@ -5,7 +5,6 @@ import eVacina.evacina.controller.exceptions.FieldMessage;
 import eVacina.evacina.dtos.CadastrarPacienteDTO;
 import eVacina.evacina.entites.Paciente;
 import eVacina.evacina.repository.PacienteJpaRepository;
-import eVacina.evacina.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
@@ -26,11 +25,10 @@ public class CadastraPacienteValidator implements ConstraintValidator<CadastraPa
     public boolean isValid(CadastrarPacienteDTO dto, ConstraintValidatorContext context) {
         List<FieldMessage> list = new ArrayList<>();
 
-        Paciente user = pacienteRepository.findByCpf(dto.getCpf())
-                        .orElseThrow( () -> new ResourceNotFoundException( "Cpf Não Cadastrado" ) );
+        Paciente user = pacienteRepository.findByCpfAndNome(dto.getCpf(),dto.getNome());
 
         if (user != null){
-            list.add( new FieldMessage("Cpf","Cpf já existe") );
+            list.add( new FieldMessage("Cpf E Nome","Já existem") );
         }
 
         for (FieldMessage e : list) {

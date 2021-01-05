@@ -88,7 +88,7 @@ public class TesteConfig implements CommandLineRunner {
     private Telefone montaTelefone() {
         Telefone tel = new Telefone();
         tel.setNumero( "12312312" );
-        tel.setTipo( TipoTelefone.Telefone );
+        tel.setTipo( TipoTelefone.TELEFONE );
         tel.setEndereco( montaEndereco() );
         return tel;
     }

@@ -21,13 +21,13 @@ public class PacienteController {
     private PacienteService service;
 
     @GetMapping
-    public ResponseEntity<List<ConsultarPacientesCadastradosDTO>> findAll(){
+    public ResponseEntity<List<ConsultarPacientesCadastradosDTO>> consultarPacientesCadastrados(){
         List<ConsultarPacientesCadastradosDTO> list = service.findAll();
         return ResponseEntity.ok().body( list );
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<CadastrarPacienteDTO> save(@RequestBody @Valid CadastrarPacienteDTO request) throws Exception {
+    public ResponseEntity<CadastrarPacienteDTO> savePaciente(@RequestBody @Valid CadastrarPacienteDTO request) throws Exception {
         CadastrarPacienteDTO response = service.savePaciente(request);
         return ResponseEntity.ok().body( response );
     }

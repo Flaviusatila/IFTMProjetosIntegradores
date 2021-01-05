@@ -2,8 +2,8 @@ package eVacina.evacina.entites.enums;
 
 public enum TipoTelefone {
 
-    Cell(1),
-    Telefone(2);
+    CELULAR(1),
+    TELEFONE(2);
 
     private int code;
 

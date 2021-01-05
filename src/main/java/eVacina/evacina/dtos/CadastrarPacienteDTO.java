@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
@@ -26,13 +25,9 @@ public class CadastrarPacienteDTO {
     private String nome;
 
     @JsonProperty("apelido")
-    @NotEmpty(message = "Nao pode ser vazio o email")
-    @Email(message = "Problema na autenticação do email")
     private String apelido;
 
     @JsonProperty("telefone")
-    @NotEmpty(message = "Nao pode ser vazio o phone")
-    @Length(min = 8, max = 20, message = "O tamanho de ser entre 8 e 20 numeros")
     private Telefone telefone;
 
     public Telefone getTelefone() {
