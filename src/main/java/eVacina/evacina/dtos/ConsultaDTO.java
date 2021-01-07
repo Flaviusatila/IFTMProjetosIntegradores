@@ -6,6 +6,7 @@ import eVacina.evacina.entites.CartaoVacina;
 import eVacina.evacina.entites.Consulta;
 import eVacina.evacina.entites.Paciente;
 import eVacina.evacina.entites.ProfSaude;
+import eVacina.evacina.entites.enums.HorarioDisponivel;
 
 import java.time.LocalDateTime;
 
@@ -18,24 +19,22 @@ public class ConsultaDTO {
     @JsonProperty("local_consulta")
     private String local;
 
-    @JsonProperty("horario_disponivel")
-    private Integer horarioDisponivel;
+//    private HorarioDisponivel horarioDisponivel;
 
 
     public ConsultaDTO() {
     }
 
-    public ConsultaDTO(LocalDateTime hora, String local, Integer horarioDisponivel, Paciente paciente, CartaoVacina cartaoVacinaConsulta, ProfSaude profSaude) {
+    public ConsultaDTO(LocalDateTime hora, String local, HorarioDisponivel horarioDisponivel, Paciente paciente, CartaoVacina cartaoVacinaConsulta, ProfSaude profSaude) {
         this.hora = hora;
         this.local = local;
-        this.horarioDisponivel = horarioDisponivel;
+//        this.horarioDisponivel = horarioDisponivel;
     }
 
     public ConsultaDTO(Consulta consulta) {
         this.hora = consulta.getHora();
         this.local = consulta.getLocal();
-        this.horarioDisponivel = consulta.getHorarioDisponivel().getCode();
-
+//        this.horarioDisponivel = HorarioDisponivel.DISPONIVEL;
     }
 
     public LocalDateTime getHora() {
@@ -54,13 +53,12 @@ public class ConsultaDTO {
         this.local = local;
     }
 
-    public Integer getHorarioDisponivel() {
-        return horarioDisponivel;
-    }
+//    public HorarioDisponivel getHorarioDisponivel() {
+//        return horarioDisponivel;
+//    }
 
-    public void setHorarioDisponivel(Integer horarioDisponivel) {
-        this.horarioDisponivel = horarioDisponivel;
-    }
-
+//    public void setHorarioDisponivel(HorarioDisponivel horarioDisponivel) {
+//        this.horarioDisponivel = horarioDisponivel;
+//    }
 
 }

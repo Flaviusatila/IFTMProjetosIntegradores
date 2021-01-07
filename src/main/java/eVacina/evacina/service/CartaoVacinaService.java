@@ -67,11 +67,11 @@ public class CartaoVacinaService {
         Paciente paciente = pacienteJpaRepository.findByCpf( dto.getCpf() )
                 .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Pacientes cadastrados" ) );
 
-        ProfSaude profSaude = profSaudeJpaRepository.findByUsuario( dto.getUsuario() )
-                .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Profissionais da Saude cadastrados" ) );
+//        ProfSaude profSaude = profSaudeJpaRepository.findByUsuario( dto.getUsuario() )
+//                .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Profissionais da Saude cadastrados" ) );
 
-        CartaoVacina cartaoVacina = cartaoVacinaJpaRepository.findByCod( dto.getCpf() )
-                .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Cartao de Vacina cadastrados" ) );
+//        CartaoVacina cartaoVacina = cartaoVacinaJpaRepository.findByCod( dto.getCpf() )
+//                .orElseThrow( () -> new ResourceNotFoundException( "Nao existe Cartao de Vacina cadastrados" ) );
 
         Vacina vacina = new Vacina();
         vacina.setNome( dto.getNome() );
@@ -87,16 +87,16 @@ public class CartaoVacinaService {
         List<ItemVacina> list = new ArrayList<>();
 
         list.add( itemVacina );
-        cartaoVacina.setItemVacinas( list );
+//        cartaoVacina.setItemVacinas( list );
 
         Consulta consulta = new Consulta();
-        consulta.setCartaoVacinaConsulta( cartaoVacina );
+//        consulta.setCartaoVacinaConsulta( cartaoVacina );
         consulta.setPaciente( paciente );
-        consulta.setProfSaude( profSaude );
+//        consulta.setProfSaude( profSaude );
         consulta.setHora( dto.getConsulta().getHora() );
         consulta.setLocal( dto.getConsulta().getLocal() );
 
-        cartaoVacinaJpaRepository.save( cartaoVacina );
+//        cartaoVacinaJpaRepository.save( cartaoVacina );
         consultaJpaRepository.save( consulta );
 
         return dto;

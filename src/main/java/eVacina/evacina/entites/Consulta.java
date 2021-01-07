@@ -23,8 +23,7 @@ public class Consulta {
 
     private String local;
 
-    @JsonProperty("horario_disponivel")
-    private Integer horarioDisponivel;
+//    private Integer horarioDisponivel;
 
     @OneToOne
     private Paciente paciente;
@@ -72,14 +71,14 @@ public class Consulta {
         this.profSaude = profSaude;
     }
 
-    public HorarioDisponivel getHorarioDisponivel() {
-        return HorarioDisponivel.valueOf( horarioDisponivel);
-    }
-
-    public void setHorarioDisponivel(HorarioDisponivel horarioDisponivel) {
-        if (horarioDisponivel != null)
-        this.horarioDisponivel = horarioDisponivel.getCode();
-    }
+//    public HorarioDisponivel getHorarioDisponivel() {
+//        return HorarioDisponivel.valueOf( horarioDisponivel);
+//    }
+//
+//    public void setHorarioDisponivel(HorarioDisponivel horarioDisponivel) {
+//        if (horarioDisponivel != null)
+//        this.horarioDisponivel = horarioDisponivel.getCode();
+//    }
 
     public Paciente getPaciente() {
         return paciente;

@@ -54,7 +54,7 @@ public class ConsultaService {
 
             Consulta consulta = new Consulta();
 
-            consulta.setHorarioDisponivel( INDISPONIVEL );
+//            consulta.setHorarioDisponivel( INDISPONIVEL );
             consulta.setHora( request.getConsulta().getHora() );
             consulta.setLocal( request.getConsulta().getLocal() );
             consulta.setProfSaude( profSaude );

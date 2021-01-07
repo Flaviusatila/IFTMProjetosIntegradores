@@ -1,12 +1,10 @@
 package eVacina.evacina.config;
 
+import eVacina.evacina.dtos.CadastrarPacienteDTO;
 import eVacina.evacina.entites.*;
 import eVacina.evacina.entites.enums.HorarioDisponivel;
 import eVacina.evacina.entites.enums.TipoTelefone;
-import eVacina.evacina.repository.CartaoVacinaJpaRepository;
-import eVacina.evacina.repository.ConsultaJpaRepository;
-import eVacina.evacina.repository.ItemVacinaJpaRepository;
-import eVacina.evacina.repository.ProfSaudeJpaRepository;
+import eVacina.evacina.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +28,9 @@ public class TesteConfig implements CommandLineRunner {
 
     @Autowired
     private ProfSaudeJpaRepository profSaudeJpaRepository;
+
+    @Autowired
+    private PacienteJpaRepository pacienteJpaRepository;
 
     private static final Date date = new Date( 2020, 22, 11 );
 
@@ -59,9 +60,38 @@ public class TesteConfig implements CommandLineRunner {
         consulta.setHora( LocalDateTime.now() );
         consulta.setCartaoVacinaConsulta( cartaoVacina );
         consulta.setProfSaude( montaProfSaude() );
-        consulta.setHorarioDisponivel( HorarioDisponivel.DISPONIVEL );
+//        consulta.setHorarioDisponivel( HorarioDisponivel.DISPONIVEL );
 
         consultaJpaRepository.save( consulta );
+
+        Paciente cadastrarPacienteDTO = new Paciente();
+        cadastrarPacienteDTO.setNome("Flavius");
+        cadastrarPacienteDTO.setCpf("01234567891");
+        cadastrarPacienteDTO.setApelido("Lindao");
+        cadastrarPacienteDTO.setDataCastro(new Date());
+
+        Paciente cadastrarPacienteDTO2 = new Paciente();
+        cadastrarPacienteDTO2.setNome("Angoti");
+        cadastrarPacienteDTO2.setCpf("01234567892");
+        cadastrarPacienteDTO2.setApelido("professor");
+        cadastrarPacienteDTO2.setDataCastro(new Date());
+
+        Paciente cadastrarPacienteDTO3 = new Paciente();
+        cadastrarPacienteDTO3.setNome("Carlos");
+        cadastrarPacienteDTO3.setCpf("01234567893");
+        cadastrarPacienteDTO3.setApelido("Integrante");
+        cadastrarPacienteDTO3.setDataCastro(new Date());
+
+        Paciente cadastrarPacienteDTO4 = new Paciente();
+        cadastrarPacienteDTO4.setNome("Rodrigo");
+        cadastrarPacienteDTO4.setCpf("01234567894");
+        cadastrarPacienteDTO4.setApelido("Integrandte");
+        cadastrarPacienteDTO4.setDataCastro(new Date());
+
+        pacienteJpaRepository.save(cadastrarPacienteDTO);
+        pacienteJpaRepository.save(cadastrarPacienteDTO2);
+        pacienteJpaRepository.save(cadastrarPacienteDTO3);
+        pacienteJpaRepository.save(cadastrarPacienteDTO4);
 
     }
 
