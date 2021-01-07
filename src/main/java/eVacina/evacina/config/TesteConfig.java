@@ -70,17 +70,35 @@ public class TesteConfig implements CommandLineRunner {
         cadastrarPacienteDTO.setApelido("Lindao");
         cadastrarPacienteDTO.setDataCastro(new Date());
 
+        CartaoVacina cartaoVacina2 = new CartaoVacina();
+        cartaoVacina2.setCod( "1123123" );
+        cartaoVacina2.setQtdVacina( 1L );
+        cartaoVacina2.setVacinaPendente( "Nenhum" );
+        cartaoVacina2.setTelefone( montaTelefone() );
+
         Paciente cadastrarPacienteDTO2 = new Paciente();
         cadastrarPacienteDTO2.setNome("Angoti");
         cadastrarPacienteDTO2.setCpf("01234567892");
         cadastrarPacienteDTO2.setApelido("professor");
         cadastrarPacienteDTO2.setDataCastro(new Date());
 
+        CartaoVacina cartaoVacina3 = new CartaoVacina();
+        cartaoVacina3.setCod( "1123123" );
+        cartaoVacina3.setQtdVacina( 1L );
+        cartaoVacina3.setVacinaPendente( "Nenhum" );
+        cartaoVacina3.setTelefone( montaTelefone() );
+
         Paciente cadastrarPacienteDTO3 = new Paciente();
         cadastrarPacienteDTO3.setNome("Carlos");
         cadastrarPacienteDTO3.setCpf("01234567893");
         cadastrarPacienteDTO3.setApelido("Integrante");
         cadastrarPacienteDTO3.setDataCastro(new Date());
+
+        CartaoVacina cartaoVacina4 = new CartaoVacina();
+        cartaoVacina4.setCod( "1123123" );
+        cartaoVacina4.setQtdVacina( 1L );
+        cartaoVacina4.setVacinaPendente( "Nenhum" );
+        cartaoVacina4.setTelefone( montaTelefone() );
 
         Paciente cadastrarPacienteDTO4 = new Paciente();
         cadastrarPacienteDTO4.setNome("Rodrigo");
@@ -89,10 +107,12 @@ public class TesteConfig implements CommandLineRunner {
         cadastrarPacienteDTO4.setDataCastro(new Date());
 
         pacienteJpaRepository.save(cadastrarPacienteDTO);
+        cartaoVacinaJpaRepository.save(cartaoVacina2);
         pacienteJpaRepository.save(cadastrarPacienteDTO2);
+        cartaoVacinaJpaRepository.save(cartaoVacina3);
         pacienteJpaRepository.save(cadastrarPacienteDTO3);
+        cartaoVacinaJpaRepository.save(cartaoVacina4);
         pacienteJpaRepository.save(cadastrarPacienteDTO4);
-
     }
 
     private ProfSaude montaProfSaude() {

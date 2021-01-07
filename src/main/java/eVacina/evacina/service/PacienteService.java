@@ -36,7 +36,6 @@ public class PacienteService {
         List<Paciente> pacienteList = pacienteJpaRepository.findAll();
         List<ConsultarPacientesCadastradosDTO> list = new ArrayList<>();
 
-
         if (!pacienteList.isEmpty()) {
             for (Paciente paciente :
                     pacienteList) {
@@ -44,8 +43,9 @@ public class PacienteService {
                                                       .orElseThrow( () -> new ResourceNotFoundException("Nao existe Pacientes cadastrados"));
                 ConsultarPacientesCadastradosDTO dto = new ConsultarPacientesCadastradosDTO( paciente, cartaoVacina );
                 list.add( dto );
-                return list;
+
             }
+            return list;
         }
         throw new ResourceNotFoundException("Nao existe Pacientes cadastrados");
 }
