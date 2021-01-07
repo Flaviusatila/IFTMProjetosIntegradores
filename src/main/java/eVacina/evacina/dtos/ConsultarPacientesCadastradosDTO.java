@@ -34,6 +34,7 @@ public class ConsultarPacientesCadastradosDTO {
         this.dataCastro = paciente.getDataCastro();
         this.cpf = paciente.getCpf();
         this.nome = paciente.getNome();
+        this.apelido = paciente.getApelido();
         this.telefone = cartaoVacina.getTelefone();
     }
 
