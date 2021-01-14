@@ -18,8 +18,6 @@ public class ListaItemVacinaDTO {
     @JsonProperty("dose")
     private String dose;
 
-    @JsonProperty("data_aplicacao")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dataAplicacao;
 
     public ListaItemVacinaDTO() {
@@ -29,15 +27,6 @@ public class ListaItemVacinaDTO {
         this.nome = item.getVacina().getNome();
         this.observacoes = item.getObservacao();
         this.dose = item.getVacina().getDose();
-        this.dataAplicacao = item.getDataAplicacao();
-    }
-
-    public Date getDataAplicacao(Date dataAplicacao) {
-        return this.dataAplicacao;
-    }
-
-    public void setDataAplicacao(Date dataAplicacao) {
-        this.dataAplicacao = dataAplicacao;
     }
 
     public String getNome() {
@@ -62,6 +51,14 @@ public class ListaItemVacinaDTO {
 
     public void setDose(String dose) {
         this.dose = dose;
+    }
+
+    public Date getDataAplicacao() {
+        return dataAplicacao;
+    }
+
+    public void setDataAplicacao(Date dataAplicacao) {
+        this.dataAplicacao = dataAplicacao;
     }
 
     public ItemVacina toEntity(){return new ItemVacina(dataAplicacao, observacoes,nome,dose);}

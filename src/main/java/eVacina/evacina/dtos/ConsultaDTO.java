@@ -14,7 +14,7 @@ public class ConsultaDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm")
     @JsonProperty("hora_consulta")
-    private LocalDateTime hora;
+    private String hora;
 
     @JsonProperty("local_consulta")
     private String local;
@@ -25,7 +25,7 @@ public class ConsultaDTO {
     public ConsultaDTO() {
     }
 
-    public ConsultaDTO(LocalDateTime hora, String local, HorarioDisponivel horarioDisponivel, Paciente paciente, CartaoVacina cartaoVacinaConsulta, ProfSaude profSaude) {
+    public ConsultaDTO(String hora, String local, HorarioDisponivel horarioDisponivel, Paciente paciente, CartaoVacina cartaoVacinaConsulta, ProfSaude profSaude) {
         this.hora = hora;
         this.local = local;
 //        this.horarioDisponivel = horarioDisponivel;
@@ -37,11 +37,11 @@ public class ConsultaDTO {
 //        this.horarioDisponivel = HorarioDisponivel.DISPONIVEL;
     }
 
-    public LocalDateTime getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(LocalDateTime hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 

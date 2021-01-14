@@ -18,8 +18,7 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm")
-    private LocalDateTime hora;
+    private String hora;
 
     private String local;
 
@@ -39,11 +38,11 @@ public class Consulta {
     }
 
 
-    public LocalDateTime getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(LocalDateTime hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 

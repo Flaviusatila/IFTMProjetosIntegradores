@@ -11,37 +11,26 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CadastrarDadosCartaoVacinaDTO {
 
-    @JsonProperty("cpf")
+
     @NotNull
     private String cpf;
 
-    @JsonProperty("usuario_profissional_saude")
     private String usuario;
 
-    @JsonProperty("nome")
     private String nome;
 
-    @JsonProperty("procedimentos")
     private String procedimentos;
 
-    @JsonProperty("obesevacoes_vacina")
     private String observacoesVacina;
 
-    @JsonProperty("dose")
     private String dose;
 
-    @JsonProperty("data_aplicacao")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date dataAplicacao;
+    private String dataAplicacao;
 
-    @JsonProperty("lote")
     private Integer lote;
 
-    @JsonProperty("data_venc")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date dataVenc;
+    private String dataVenc;
 
-    @JsonProperty("consulta")
     private Consulta consulta;
 
     public String getCpf() {
@@ -92,11 +81,11 @@ public class CadastrarDadosCartaoVacinaDTO {
         this.dose = dose;
     }
 
-    public Date getDataAplicacao() {
+    public String getDataAplicacao() {
         return dataAplicacao;
     }
 
-    public void setDataAplicacao(Date dataAplicacao) {
+    public void setDataAplicacao(String dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
     }
 
@@ -108,11 +97,11 @@ public class CadastrarDadosCartaoVacinaDTO {
         this.lote = lote;
     }
 
-    public Date getDataVenc() {
+    public String getDataVenc() {
         return dataVenc;
     }
 
-    public void setDataVenc(Date dataVenc) {
+    public void setDataVenc(String dataVenc) {
         this.dataVenc = dataVenc;
     }
 
@@ -123,6 +112,4 @@ public class CadastrarDadosCartaoVacinaDTO {
     public void setConsulta(Consulta consulta) {
         this.consulta = consulta;
     }
-
-
 }

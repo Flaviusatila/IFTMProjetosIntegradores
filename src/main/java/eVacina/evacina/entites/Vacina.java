@@ -21,7 +21,7 @@ public class Vacina {
     private Integer lote;
 
 
-    private Date dataVenc;
+    private String dataVenc;
 
     public String getNome() {
         return nome;
@@ -55,11 +55,11 @@ public class Vacina {
         this.lote = lote;
     }
 
-    public Date getDataVenc() {
+    public String getDataVenc() {
         return dataVenc;
     }
 
-    public void setDataVenc(Date dataVenc) {
+    public void setDataVenc(String dataVenc) {
         this.dataVenc = dataVenc;
     }
 

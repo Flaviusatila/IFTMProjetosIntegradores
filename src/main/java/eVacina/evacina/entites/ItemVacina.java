@@ -27,7 +27,7 @@ public class ItemVacina {
     public ItemVacina() {
     }
 
-    public ItemVacina(Date dataAplicacao, String observacao, String nome, String dose) {
+    public ItemVacina(Date dataAplicacao,String observacao, String nome, String dose) {
         this.dataAplicacao = dataAplicacao;
         this.observacao = observacao;
         this.vacina.setNome( nome );

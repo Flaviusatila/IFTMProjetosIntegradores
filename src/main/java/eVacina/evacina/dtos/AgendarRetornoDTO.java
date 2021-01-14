@@ -12,7 +12,7 @@ public class AgendarRetornoDTO {
     @NotNull
     private String cpf;
 
-    @JsonProperty("usuario_profissional_saude")
+    @JsonProperty("usuario")
     private String usuario;
 
     @JsonProperty("consulta")

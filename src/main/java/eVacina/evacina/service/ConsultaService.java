@@ -31,45 +31,38 @@ public class ConsultaService {
     @Autowired
     private ConsultaJpaRepository consultaJpaRepository;
 
-    public Consulta save (Consulta request){
-        return consultaJpaRepository.save( request );
+    public Consulta save(Consulta request) {
+        return consultaJpaRepository.save(request);
     }
 
-    public List<Consulta> findAll(){
+    public List<Consulta> findAll() {
         return consultaJpaRepository.findAll();
     }
 
     @Transactional
     public AgendarRetornoDTO agendarRetorno(AgendarRetornoDTO request) {
-        Paciente paciente = pacienteJpaRepository.findByCpf( request.getCpf() )
-                            .orElseThrow( () -> new ResourceNotFoundException("Nao existe Pacientes cadastrados"));
+        Paciente paciente = pacienteJpaRepository.findByCpf(request.getCpf())
+                .orElseThrow(() -> new ResourceNotFoundException("Nao existe Pacientes cadastrados"));
 
-        ProfSaude profSaude = profSaudeJpaRepository.findByUsuario( request.getUsuario() )
-                              .orElseThrow( () -> new ResourceNotFoundException("Nao existe Profissionais da Saude cadastrados"));
+        ProfSaude profSaude = profSaudeJpaRepository.findByUsuario(request.getUsuario())
+                .orElseThrow(() -> new ResourceNotFoundException("Nao existe Profissionais da Saude cadastrados"));
 
-//        Object existe = consultaJpaRepository.findByHora( request.getConsulta().getHora())
-//                            .orElseThrow( () -> new NotContextException("Cadastro de consulta nao tem horario disponivel"));
-//
-//        if (existe != HorarioDisponivel.DISPONIVEL){
+        Consulta consulta = new Consulta();
 
-            Consulta consulta = new Consulta();
+        consulta.setHora(request.getConsulta().getHora());
+        consulta.setLocal(request.getConsulta().getLocal());
+        consulta.setProfSaude(profSaude);
+        consulta.setPaciente(paciente);
 
-//            consulta.setHorarioDisponivel( INDISPONIVEL );
-            consulta.setHora( request.getConsulta().getHora() );
-            consulta.setLocal( request.getConsulta().getLocal() );
-            consulta.setProfSaude( profSaude );
-            consulta.setPaciente( paciente );
+        consultaJpaRepository.save(consulta);
 
-            consultaJpaRepository.save( consulta );
+        return request;
 
-            return request;
-//        }
-//        throw new NotContextException("Consulta nao tem horario disponivel");
     }
 
     @Transactional
     public Page<ConsultaDTO> findAllPaged(PageRequest pageable) {
         Page<Consulta> list = consultaJpaRepository.findAll(pageable);
-        return list.map( e -> new ConsultaDTO(e) );
+        return list.map(e -> new ConsultaDTO(e));
     }
 }
