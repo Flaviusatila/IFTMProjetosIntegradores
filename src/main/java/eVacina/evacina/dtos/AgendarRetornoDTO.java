@@ -15,6 +15,8 @@ public class AgendarRetornoDTO {
     @JsonProperty("usuario_profissional_saude")
     private String usuario;
 
+
+
     @JsonProperty("consulta")
     private Consulta consulta;
 
